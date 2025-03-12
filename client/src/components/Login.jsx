@@ -6,12 +6,11 @@ import "../css/style.css";
 const Login = ({ setLoggedInUser }) => {
 	const [formData, setFormData] = useState({
 		username: "",
-		email: "",
 		password: "",
 	});
 	const [message, setMessage] = useState("");
 
-	const { username, email, password } = formData;
+	const { username, password } = formData;
 
 	const onChange = (e) =>
 		setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -44,14 +43,6 @@ const Login = ({ setLoggedInUser }) => {
 					placeholder="Username"
 					name="username"
 					value={username}
-					onChange={onChange}
-					required
-				/>
-				<input
-					type="email"
-					placeholder="Email"
-					name="email"
-					value={email}
 					onChange={onChange}
 					required
 				/>

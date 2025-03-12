@@ -21,12 +21,13 @@ const Register = () => {
 		try {
 			const res = await axios.post("http://localhost:5000/api/auth/register", {
 				username,
+				email,
 				password,
 			});
 			setMessage("Registered successfully"); // Set success message
 		} catch (err) {
-			console.error(err.response.data);
-			setMessage("Failed to register, User already exists"); // Set error message
+			console.error("This is the error: ", err.response.data.msg);
+			setMessage(`Failed to register, ${err.response.data.msg}`); // Set error message
 		}
 	};
 
@@ -43,7 +44,7 @@ const Register = () => {
 					required
 				/>
 				<input
-					type="text"
+					type="email"
 					placeholder="Email"
 					name="email"
 					value={email}
