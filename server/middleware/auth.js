@@ -1,6 +1,6 @@
 // middleware/auth.js
 const jwt = require("jsonwebtoken");
-const secretKey = "your-secret-key";
+const secretKey = process.env.JWT_SECRET;
 
 module.exports = (req, res, next) => {
 	try {
