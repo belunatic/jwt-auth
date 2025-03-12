@@ -13,9 +13,7 @@ app.use(cors());
 
 connectDB();
 
-app.use("/", async (req, res) => {
-	res.send("I am son cool");
-});
+app.use("/auth", authRoute);
 
 app.listen(process.env.PORT || 5000, () => {
 	console.log("let get this party started 🐯");
