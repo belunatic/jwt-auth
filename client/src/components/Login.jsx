@@ -23,6 +23,7 @@ const Login = ({ setLoggedInUser }) => {
 				password,
 			});
 			localStorage.setItem("token", res.data.token);
+			console.log(res);
 			setLoggedInUser(username);
 
 			// Set success message
