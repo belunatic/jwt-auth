@@ -14,6 +14,10 @@ router.post("/register", async (req, res) => {
 		let user = await User.findOne({
 			$or: [{ username: username }, { email: email }],
 		});
+
+		if (!user || !email || !password) {
+			return res.status(400).json({ msg: "Please add all fields" });
+		}
 		if (user) {
 			//check to see if username or email exist
 			return user.username === username
