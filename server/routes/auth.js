@@ -15,8 +15,8 @@ router.post("/register", async (req, res) => {
 			$or: [{ username: username }, { email: email }],
 		});
 		if (user) {
-			console.log("this is register user", user);
-			return user.username
+			//check to see if username or email exist
+			return user.username === username
 				? res.status(400).json({ msg: "User already exists" })
 				: res.status(400).json({ msg: "Email already exists" });
 		}
