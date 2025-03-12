@@ -13,8 +13,8 @@ app.use(cors());
 
 connectDB();
 
-app.use("/auth", authRoute);
+app.use("/api/auth", authRoute);
 
-app.listen(process.env.PORT || 5000, () => {
+app.listen(process.env.PORT, () => {
 	console.log("let get this party started 🐯");
 });

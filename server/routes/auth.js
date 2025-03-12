@@ -11,10 +11,11 @@ router.post("/register", async (req, res) => {
 
 	try {
 		// let user = await User.findOne({ username });
-		let user = await User.find({
+		let user = await User.findOne({
 			$or: [{ username: username }, { email: email }],
 		});
 		if (user) {
+			console.log("this is register user", user);
 			return user.username
 				? res.status(400).json({ msg: "User already exists" })
 				: res.status(400).json({ msg: "Email already exists" });
@@ -26,6 +27,8 @@ router.post("/register", async (req, res) => {
 		user.password = await bcrypt.hash(password, salt);
 
 		await user.save();
+		//console.log out user!
+		console.log(user, " is saved");
 
 		const payload = {
 			user: { id: user.id },
