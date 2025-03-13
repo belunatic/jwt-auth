@@ -20,7 +20,12 @@ const UserSchema = new mongoose.Schema(
 			type: Boolean,
 			default: false,
 		},
+		createdAt: {
+			type: Date,
+			default: new Date(),
+		},
 	},
+
 	{ timestamps: true /*this will automatic give use a createAt timestamp*/ }
 );
 
