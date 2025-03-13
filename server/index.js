@@ -4,7 +4,7 @@ const cors = require("cors");
 const logger = require("morgan");
 const authRoute = require("./routes/auth");
 const connectDB = require("./config/database");
-const checkAuth = require("./middleware/auth");
+// const checkAuth = require("./middleware/auth");
 
 require("dotenv").config({ path: "./config/.env" });
 
@@ -17,11 +17,11 @@ app.use(express.urlencoded({ extended: true }));
 
 connectDB();
 
-app.use("/api/auth", authRoute);
+app.use("/auth", authRoute);
 
-app.use("/", checkAuth, (req, res) => {
-	res.send("Hello World");
-});
+// app.use("/", checkAuth, (req, res) => {
+// 	res.send("Hello World");
+// });
 
 app.listen(process.env.PORT, () => {
 	console.log("let get this party started 🐯");
