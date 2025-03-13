@@ -55,7 +55,7 @@ module.exports = {
 	login: asyncHandler(async (req, res) => {
 		const { username, password } = req.body;
 
-		// Check for user email
+		// Check for user username
 		const user = await User.findOne({ username });
 
 		if (user && (await bcrypt.compare(password, user.password))) {
@@ -63,10 +63,10 @@ module.exports = {
 				_id: user.id,
 				username: user.username,
 				email: user.email,
-				token: generateToken(user._id),
+				token: createSecretToken(user._id),
 			});
 		} else {
-			res.status(400);
+			res.status(400); //.json({ msg: "Invalid credentials" });
 			throw new Error("Invalid credentials");
 		}
 	}),
