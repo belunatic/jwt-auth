@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const { createSecretToken } = require("../util/SecretToken");
+const { generateToken } = require("../util/secretToken");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 
@@ -42,7 +42,7 @@ module.exports = {
 				_id: user.id,
 				username: user.username,
 				email: user.email,
-				token: createSecretToken(user._id),
+				token: generateToken(user._id),
 			});
 		} else {
 			res.status(400).json({ msg: "Invalid user data" });
@@ -63,7 +63,7 @@ module.exports = {
 				_id: user.id,
 				username: user.username,
 				email: user.email,
-				token: createSecretToken(user._id),
+				token: generateToken(user._id),
 			});
 		} else {
 			res.status(400); //.json({ msg: "Invalid credentials" });

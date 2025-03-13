@@ -19,9 +19,9 @@ connectDB();
 
 app.use("/auth", authRoute);
 
-// app.use("/", checkAuth, (req, res) => {
-// 	res.send("Hello World");
-// });
+app.use("/", (req, res) => {
+	res.send("Hello World");
+});
 
 app.listen(process.env.PORT, () => {
 	console.log("let get this party started 🐯");
