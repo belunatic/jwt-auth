@@ -17,7 +17,7 @@ const ensureAuth = asyncHandler(async (req, res, next) => {
 			const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
 			// Get user from the token
-			//in createSecretToken an id was sent as a payload
+			//in generateToken an id was sent as a payload
 			req.user = await User.findById(decoded.id).select("-password");
 
 			next();

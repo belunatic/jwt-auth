@@ -4,7 +4,7 @@ const cors = require("cors");
 const logger = require("morgan");
 const authRoute = require("./routes/auth");
 const connectDB = require("./config/database");
-// const checkAuth = require("./middleware/auth");
+const { ensureAuth } = require("./middleware/auth");
 
 require("dotenv").config({ path: "./config/.env" });
 
@@ -19,8 +19,8 @@ connectDB();
 
 app.use("/auth", authRoute);
 
-app.use("/", (req, res) => {
-	res.send("Hello World");
+app.use("/", ensureAuth, (req, res) => {
+	res.status(200).json(req.user);
 });
 
 app.listen(process.env.PORT, () => {
