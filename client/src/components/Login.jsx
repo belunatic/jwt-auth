@@ -28,7 +28,7 @@ const Login = ({ setLoggedInUser }) => {
 			localStorage.setItem(
 				"user",
 				JSON.stringify({
-					name: res.data.name,
+					username: res.data.username,
 					token: res.data.token,
 					email: res.data.email,
 				})
