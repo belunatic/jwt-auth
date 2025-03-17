@@ -22,7 +22,17 @@ const Login = ({ setLoggedInUser }) => {
 				username,
 				password,
 			});
-			localStorage.setItem("token", res.data.token);
+			// to make it simple i have not encrypted the items stored in local storage
+			// ensure to use encryption once you get the hang of how all of these things work
+			// as we have to protect our localStorage data in case of a breach.
+			localStorage.setItem(
+				"user",
+				JSON.stringify({
+					name: res.data.name,
+					token: res.data.token,
+					email: res.data.email,
+				})
+			);
 			console.log(res);
 			setLoggedInUser(username);
 

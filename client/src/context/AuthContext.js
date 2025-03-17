@@ -1,41 +1,19 @@
-import { createContext, useReducer, useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
+import axios from "axios";
 
-export const AuthContext = createContext();
+const AuthContext = createContext(null);
 
-// reducer function to set the user state based on the action type
-export const authReducer = (state, action) => {
-	switch (action.type) {
-		case "LOGIN":
-			return { user: action.payload };
-		case "LOGOUT":
-			return { user: null };
-		default:
-			return state;
-	}
-};
-
-// AuthContextProvider component to wrap the app with the context provider
+export const UseAuthContext = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({ children }) => {
-	// state to hold the user object
-	// dispatch function to update the user object
-	const [state, dispatch] = useReducer(authReducer, {
-		user: null,
-	});
-
-	// get the user object from local storage if it exists on mount
-
+	const [loggedInUser, setLoggedInUser] = useState(null);
 	useEffect(() => {
-		const user = JSON.parse(localStorage.getItem("user"));
-
-		if (user) {
-			dispatch({ type: "LOGIN", payload: user });
+		const token = localStorage.getItem("token");
+		if (token) {
+			// Set the token in the header
+			axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 		}
 	}, []);
 
-	return (
-		<AuthContext.Provider value={{ ...state, dispatch }}>
-			{children}
-		</AuthContext.Provider>
-	);
+	return <AuthContext.Provider value={{}}>{children}</AuthContext.Provider>;
 };
