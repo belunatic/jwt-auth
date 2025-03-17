@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 
 module.exports = {
 	// @desc    Register new user
-	// @route   POST /api/users
+	// @route   POST /users
 	// @access  Public
 	register: asyncHandler(async (req, res) => {
 		const { username, email, password } = req.body;
@@ -37,6 +37,7 @@ module.exports = {
 		});
 
 		//if user is created
+		//send the user id, username, email and a token to the front end
 		if (user) {
 			res.status(201).json({
 				_id: user.id,
@@ -50,7 +51,7 @@ module.exports = {
 		}
 	}),
 	// @desc    Authenticate a user
-	// @route   POST /api/users/login
+	// @route   POST /user/login
 	// @access  Public
 	login: asyncHandler(async (req, res) => {
 		const { username, password } = req.body;
@@ -69,5 +70,11 @@ module.exports = {
 			res.status(400); //.json({ msg: "Invalid credentials" });
 			throw new Error("Invalid credentials");
 		}
+	}),
+
+	// @desc    Get user data
+	// @route   GET /user/ @access  Private
+	getUser: asyncHandler(async (req, res) => {
+		res.status(200).json(req.user);
 	}),
 };

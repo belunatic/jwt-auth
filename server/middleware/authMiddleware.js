@@ -18,7 +18,9 @@ const ensureAuth = asyncHandler(async (req, res, next) => {
 
 			// Get user from the token
 			//in generateToken an id was sent as a payload
+			//now we can use the user id to get info from the database or add it to the request
 			req.user = await User.findById(decoded.id).select("-password");
+			console.log("user is authenticated");
 
 			next();
 		} catch (error) {

@@ -5,7 +5,7 @@ const logger = require("morgan");
 const authRoute = require("./routes/auth");
 const connectDB = require("./config/database");
 const { errorHandler } = require("./middleware/errorMiddleware");
-const { ensureAuth } = require("./middleware/auth");
+const { ensureAuth } = require("./middleware/authMiddleware");
 
 require("dotenv").config({ path: "./config/.env" });
 
@@ -15,14 +15,11 @@ app.use(express.json());
 app.use(cors());
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
+app.use(errorHandler);
 
 connectDB();
 
-app.use("/auth", authRoute);
-
-app.use("/", ensureAuth, (req, res) => {
-	res.status(200).json(req.user);
-});
+app.use("/user", authRoute);
 
 app.listen(process.env.PORT, () => {
 	console.log("let get this party started 🐯");
