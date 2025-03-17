@@ -1,27 +1,31 @@
 // client/src/App.js
-import React, { useState } from "react";
+import { useState } from "react";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import { UseAuthContext } from "./context/AuthContext";
+import { useEffect } from "react";
 
 const App = () => {
-	const [loggedInUser, setLoggedInUser] = useState(null);
+	const { loggedInUser, handleLogout } = UseAuthContext();
+	const [loading, setLoading] = useState(true);
 
-	const handleLogout = () => {
-		localStorage.removeItem("token"); // Remove token from localStorage
-		setLoggedInUser(null); // Set logged-in user to null
-	};
+	useEffect(() => {
+		if (loggedInUser.username) {
+			setLoading(false);
+		}
+	}, [loggedInUser]);
 
 	return (
 		<div className="App">
-			{loggedInUser ? (
+			{loggedInUser.username ? (
 				<div>
-					<p>Welcome {loggedInUser}</p>
+					<p>Welcome {loggedInUser.username}</p>
 					<button onClick={handleLogout}>Logout</button>
 				</div>
 			) : (
 				<div>
 					<Register />
-					<Login setLoggedInUser={setLoggedInUser} />
+					<Login />
 				</div>
 			)}
 		</div>
