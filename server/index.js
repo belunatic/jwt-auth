@@ -4,6 +4,7 @@ const cors = require("cors");
 const logger = require("morgan");
 const authRoute = require("./routes/auth");
 const connectDB = require("./config/database");
+const { errorHandler } = require("./middleware/errorMiddleware");
 const { ensureAuth } = require("./middleware/auth");
 
 require("dotenv").config({ path: "./config/.env" });
