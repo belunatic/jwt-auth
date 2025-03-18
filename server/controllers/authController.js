@@ -77,6 +77,7 @@ module.exports = {
 	// @desc    Get user data
 	// @route   GET /user/ @access  Private
 	getUser: asyncHandler(async (req, res) => {
+		console.log("This is req.user", req.user);
 		res.status(200).json(req.user);
 	}),
 };
