@@ -1,9 +1,12 @@
 // client/src/components/Login.js
 import React, { useState } from "react";
+import { UseAuthContext } from "../context/AuthContext";
 import axios from "axios";
 import "../css/style.css";
 
-const Login = ({ setLoggedInUser }) => {
+const Login = () => {
+	const { setLoggedInUser } = UseAuthContext();
+
 	const [formData, setFormData] = useState({
 		username: "",
 		password: "",
@@ -34,7 +37,7 @@ const Login = ({ setLoggedInUser }) => {
 				})
 			);
 			console.log(res);
-			setLoggedInUser(username);
+			setLoggedInUser({ username: res.data.username, email: res.data.email });
 
 			// Set success message
 			setMessage("Logged in successfully");
