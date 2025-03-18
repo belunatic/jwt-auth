@@ -67,8 +67,10 @@ module.exports = {
 				token: generateToken(user._id),
 			});
 		} else {
-			res.status(400); //.json({ msg: "Invalid credentials" });
-			throw new Error("Invalid credentials");
+			res.status(400).json({ msg: "Invalid credentials" });
+			/* this is an alternative way to (.json({msg:..})) throw an error but it exposes the route to the user in the console
+				-- throw new Error("Invalid credentials");
+			*/
 		}
 	}),
 
