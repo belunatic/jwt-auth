@@ -1,0 +1,4 @@
+PORT = 2000
+MONGO_DB_STRING = mongodb+srv:...
+
+JWT_SECRET = youRock
